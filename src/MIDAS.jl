@@ -1,0 +1,3 @@
+module MIDAS
+
+end # module
