@@ -1,19 +1,19 @@
-function counts_to_anom(tot, cur, cur_t):
+function counts_to_anom(tot, cur, cur_t)
     cur_mean = tot / cur_t
     sqerr = max(0, cur - cur_mean) ^ 2
     return sqerr / cur_mean + sqerr / (cur_mean * max(1, cur_t - 1))
 end
 
-function midas(df, num_rows, num_buckets):
+function midas(df, num_rows, num_buckets)
     m = maximum(df.src)
     cur_count = Edgehash(num_rows, num_buckets, m)
     total_count = Edgehash(num_rows, num_buckets, m)
     anom_score = []
 
     timestamp_keys = keys(groupby(df, ["timestamp"]))
-    for timeframe in timestamp_keys:
+    for timeframe in timestamp_keys
         cur_t = timeframe.timestamp
-        curr_df = get(groupby(df, ["timestamp"]), (timestamp=cur_t,), nothing)
+        cur_df = get(groupby(df, ["timestamp"]), (timestamp=cur_t,), nothing)
         for row in eachrow(cur_df)
             cur_src = row.src
             cur_dst = row.dst

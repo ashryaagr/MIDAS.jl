@@ -3,9 +3,16 @@
 Anomaly Detection on Dynamic (time-evolving) Graphs in Real-time and Streaming manner.
 Detecting intrusions (DoS and DDoS attacks), frauds, fake rating anomalies.
 
+## Installation
+```julia
+using Pkg
+Pkg.add("https://github.com/ashryaagr/MIDAS.jl")
+```
+
 ## Table of Contents
 
 - [Features](#features)
+- [Example](#Example)
 - [Online Articles](#online-articles)
 - [MIDAS in other Languages](#midas-in-other-languages)
 - [Citation](#citation)
@@ -17,6 +24,13 @@ Detecting intrusions (DoS and DDoS attacks), frauds, fake rating anomalies.
 - Theoretical Guarantees on False Positive Probability
 - Constant Memory (independent of graph size)
 - Constant Update Time (real-time anomaly detection to minimize harm)
+
+## Example
+```julia
+using MIDAS
+data = @load_darpa
+anomaly_score = midas(data,2,769)
+```
 
 ## Online Articles
 
@@ -36,7 +50,8 @@ Detecting intrusions (DoS and DDoS attacks), frauds, fake rating anomalies.
 6. [Java](https://github.com/jotok/MIDAS-Java) by [Joshua Tokle](https://github.com/jotok)
 7. [C++](https://github.com/bhatiasiddharth/MIDAS) by [Siddharth Bhatia](https://github.com/bhatiasiddharth)
 
-Note: This julia implementation is based on the research paper of author's of c++ implementation and the Julia implementation adopts the design from python implementation.
+Note: This julia implementation is based on the research paper of authors of c++ implementation and the Julia implementation adopts the design from python implementation.
+
 ## Citation
 
 If you use this code for your research, please consider citing the paper.
