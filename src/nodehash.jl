@@ -3,11 +3,11 @@ mutable struct Nodehash
 	num_buckets::Int
 	hash_a::Array{Int64,1}
 	hash_b::Array{Int64,1}
-	count::Array{Int64,2}
+	count::Array{Float64,2}
 end
 
 function Nodehash(r::Int, b::Int)
-	Nodehash(r, b, rand(1:b, r), rand(0:b, r), zeros(Int, r, b))
+	Nodehash(r, b, rand(1:b, r), rand(0:b, r), zeros(Float64, r, b))
 end
 
 function hash(node::Nodehash, a::Int, i::Int)
@@ -24,10 +24,10 @@ end
 
 function get_count(node::Nodehash, a::Int)
 	bucket = hash(node, a, 1)
-	min_count = edge.count[1, bucket]
+	min_count = node.count[1, bucket]
 	for i in 2:node.num_rows
 		bucket = hash(node, a, i)
-		min_count = min(min_count, edge.count[i, bucket])
+		min_count = min(min_count, node.count[i, bucket])
 	end
 	return min_count
 end

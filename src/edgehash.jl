@@ -4,11 +4,11 @@ mutable struct Edgehash
 	m::Int
 	hash_a::Array{Int64,1}
 	hash_b::Array{Int64,1}
-	count::Array{Int64,2}
+	count::Array{Float64,2}
 end
 
 function Edgehash(r::Int, b::Int, m::Int)
-	Edgehash(r, b, m, rand(1:b, r), rand(0:b, r), zeros(Int, r, b))
+	Edgehash(r, b, m, rand(1:b, r), rand(0:b, r), zeros(Float64, r, b))
 end
 
 function hash(edge::Edgehash, a::Int, b::Int, i::Int)
