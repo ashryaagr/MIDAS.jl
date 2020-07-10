@@ -21,12 +21,12 @@ function midas(df, num_rows, num_buckets)
             insert(total_count, cur_src, cur_dst, 1)
             cur_mean = get_count(total_count, cur_src, cur_dst) / cur_t
             sqerr = (get_count(cur_count, cur_src, cur_dst) - cur_mean) ^ 2
-            cur_score = cur_t == 1 ? 0 : sqerr / cur_mean + sqerr / (cur_mean * (cur_t - 1))
-            cur_score = isnan(cur_score) ? 0 : cur_score
+            cur_score = cur_t == 1 ? 0.0 : sqerr / cur_mean + sqerr / (cur_mean * (cur_t - 1))
+            cur_score = isnan(cur_score) ? 0.0 : cur_score
             push!(anom_score, cur_score)
         end
+        clear(cur_count)
     end
-    clear(cur_count)
 
     return anom_score
 end

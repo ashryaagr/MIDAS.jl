@@ -28,7 +28,7 @@ Pkg.add("https://github.com/ashryaagr/MIDAS.jl")
 ## Example
 ```julia
 using MIDAS
-data = @load_darpa
+data, labels = @load_darpa
 anomaly_score = midas(data,2,769)
 ```
 
