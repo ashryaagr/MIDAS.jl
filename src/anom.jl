@@ -4,7 +4,7 @@ function counts_to_anom(tot, cur, cur_t)
     return sqerr / cur_mean + sqerr / (cur_mean * max(1, cur_t - 1))
 end
 
-function midas(df, num_rows, num_buckets)
+function midas(df; num_rows, num_buckets)
     m = maximum(df.src)
     cur_count = Edgehash(num_rows, num_buckets, m)
     total_count = Edgehash(num_rows, num_buckets, m)
@@ -31,7 +31,10 @@ function midas(df, num_rows, num_buckets)
     return anom_score
 end
 
-function midasR(src, dst, times, num_rows, num_buckets, factor)
+function midasR(data; num_rows, num_buckets, factor)
+    src = data.src
+    dst = data.dst
+    times = data.timestamp
     m = maximum(src)
     num_entries = size(src)[1]
     cur_count = Edgehash(num_rows, num_buckets, m)

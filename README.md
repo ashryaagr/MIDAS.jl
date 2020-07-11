@@ -1,4 +1,4 @@
-# [MIDAS](https://github.com/bhatiasiddharth/MIDAS) implementation in Julia [WIP]
+# [MIDAS](https://github.com/bhatiasiddharth/MIDAS) implementation in Julia
 
 Anomaly Detection on Dynamic (time-evolving) Graphs in Real-time and Streaming manner.
 Detecting intrusions (DoS and DDoS attacks), frauds, fake rating anomalies.
@@ -28,8 +28,38 @@ Pkg.add("https://github.com/ashryaagr/MIDAS.jl")
 ## Example
 ```julia
 using MIDAS
+using ROC
+
+# Load data and ground truth labels
 data, labels = @load_darpa
-anomaly_score = midas(data,2,769)
+
+# scores using midas algorithm
+anomaly_score = midas(
+    data,
+    num_rows=2,
+    num_buckets=769
+    )
+
+# ROC analysis of scores of midas. This will take some time to run
+roc_midas = roc(anomaly_score, labels, 1.0)
+
+# AUC value for midas
+println(AUC(roc_midas))
+
+
+# scores using midasR algorithm.
+anomaly_score_R = midasR(
+    data,
+    num_rows=2,
+    num_buckets=769,
+    factor=0.4
+    )
+
+# ROC analysis for midasR. This will take some time to run
+roc_midasR = roc(anomaly_score_R, labels, 1.0)
+
+# AUC value for midasR
+println(AUC(roc_midas_R))
 ```
 
 ## Online Articles
